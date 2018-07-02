@@ -7,7 +7,7 @@ public interface UserDetailDAO {
 
 	public boolean registerUser(UserDetail userdetail);
 	public boolean checkLogin(UserDetail userdetail);
-	public boolean getUser(UserDetail loginname);
+	public UserDetail getUser(String loginname);
 	public boolean updateUser(UserDetail user);
 	public boolean deleteuser(UserDetail user);
 	public List<UserDetail> listUsers();

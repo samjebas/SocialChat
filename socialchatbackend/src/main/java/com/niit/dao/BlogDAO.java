@@ -3,6 +3,7 @@ package com.niit.dao;
 import java.util.List;
 
 import com.niit.model.Blog;
+import com.niit.model.BlogComment;
 
 public interface BlogDAO {
 	
@@ -12,8 +13,8 @@ public interface BlogDAO {
 	public boolean updateBlog(Blog blog);
 	public boolean approveBlog(Blog blog);
 	public boolean rejectBlog(Blog blog);
-	public Blog getBlog(int blogid);
-	public List<Blog> listBlog();
+	public BlogComment getBlog(int commentId);
+	public List<BlogComment> listBlog(int blogiId);
 	public boolean incrementLikes(Blog blog);
 	public boolean disLikes(Blog blog);
 
