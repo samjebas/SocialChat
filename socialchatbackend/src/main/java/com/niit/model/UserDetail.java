@@ -1,7 +1,10 @@
 package com.niit.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -9,9 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table
+@SequenceGenerator(name = "userdetailidseq", sequenceName = "USERDetail_ID_SEQ", allocationSize = 1)
 public class UserDetail {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userdetailidseq")
 	private String loginname;
 	private String password;
 	private String username;

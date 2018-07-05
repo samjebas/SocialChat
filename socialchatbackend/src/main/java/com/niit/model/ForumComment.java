@@ -3,7 +3,10 @@ package com.niit.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -11,9 +14,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table
+@SequenceGenerator(name = "forumcommentidseq", sequenceName="forumComment_id_seq", allocationSize = 1)
 public class ForumComment {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "forumcommentidseq")
 	private int commentId;
 	private int forumId;
 	private String commentText;

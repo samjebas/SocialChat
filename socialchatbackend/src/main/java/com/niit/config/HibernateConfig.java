@@ -20,7 +20,7 @@ public class HibernateConfig {
 	dataSource.setPassword("password");
 	return dataSource;
 }
-@Bean(name = "sessionFactory")
+@Bean(name = "sessionfactory")
 public SessionFactory getSessionFactory() {
 	Properties hibernateProp = new Properties();
 

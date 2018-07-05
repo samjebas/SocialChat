@@ -1,5 +1,11 @@
 package com.niit.dao;
 
-public interface ProfileUpdateDAO {
+import com.niit.model.Profile;
+
+public interface ProfileUpdateDAO  {
+	
+	
+	public void saveProfilePic(Profile profile);
+	public Profile getProfilePicture(String loginname);
 
 }
