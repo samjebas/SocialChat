@@ -6,6 +6,6 @@ public interface ProfileUpdateDAO  {
 	
 	
 	public void saveProfilePic(Profile profile);
-	public Profile getProfilePicture(String loginname);
+	public Profile getProfilePicture(String loginName);
 
 }

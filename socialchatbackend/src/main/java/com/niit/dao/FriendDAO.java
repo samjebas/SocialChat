@@ -13,9 +13,9 @@ public interface FriendDAO {
 	public boolean deleteFriendRequest(int friendId);
 	public boolean acceptFriendRequest(int friendId);
 	public boolean unFriendRequest(int friendId);
-	public List<UserDetail> showSuggestedFriend(String loginname);
-	public List<Friend> showAllFriends(String loginname);
-	public List<Friend> showPendingFriendRequest(String loginname);
+	public List<UserDetail> showSuggestedFriend(String loginName);
+	public List<Friend> showAllFriends(String loginName);
+	public List<Friend> showPendingFriendRequest(String loginName);
 	
 
 }

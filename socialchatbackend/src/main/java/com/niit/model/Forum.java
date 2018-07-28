@@ -1,6 +1,6 @@
 package com.niit.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,9 +21,9 @@ public class Forum {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "forumidseq")
 	private int forumId;
 	private String forumName;
-	private String forumContext;
+	private String forumContent;
 	private Date createDate;
-	private String loginname;
+	private String loginName;
 	private String status;
 
 	public int getForumId() {
@@ -42,12 +42,12 @@ public class Forum {
 		this.forumName = forumName;
 	}
 
-	public String getForumContext() {
-		return forumContext;
+	public String getForumContent() {
+		return forumContent;
 	}
 
-	public void setForumContext(String forumContext) {
-		this.forumContext = forumContext;
+	public void setForumContent(String forumContent) {
+		this.forumContent = forumContent;
 	}
 
 	public Date getCreateDate() {
@@ -58,12 +58,12 @@ public class Forum {
 		this.createDate = createDate;
 	}
 
-	public String getLoginname() {
-		return loginname;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setLoginname(String loginname) {
-		this.loginname = loginname;
+	public void setLoginName(String loginname) {
+		this.loginName = loginname;
 	}
 
 	public String getStatus() {

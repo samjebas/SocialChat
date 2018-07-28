@@ -3,24 +3,31 @@ package com.niit.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.niit.dao.UserDetailDAO;
 import com.niit.model.UserDetail;
 
+@Service
+@Repository("UserDAO")
 public class UserDetailDAOimpl implements UserDetailDAO {
 
 	@Autowired
 	SessionFactory sessionfactory;
 
-	public boolean registerUser(UserDetail userdetail) {
+	@Transactional
+	public boolean registerUser(UserDetail userDetail) {
 
 		try {
-			sessionfactory.getCurrentSession().save(userdetail);
+			sessionfactory.getCurrentSession().save(userDetail);
 			return true;
 
 		} catch (HibernateException e) {
@@ -32,14 +39,15 @@ public class UserDetailDAOimpl implements UserDetailDAO {
 
 	}
 
+	@Transactional
 	@SuppressWarnings("deprecation")
-	public boolean checkLogin(UserDetail userdetail) {
+	public boolean checkLogin(UserDetail userDetail) {
 
 		try {
 			Session session = sessionfactory.openSession();
-			Query query = session.createQuery("from UserDetail where loginname=:loginname and password=:password");
-			query.setParameter("loginname", userdetail.getLoginname());
-			query.setParameter("password", userdetail.getPassword());
+			Query query = session.createQuery("from UserDetail where loginName=:loginName and password=:password");
+			query.setParameter("loginName", userDetail.getLoginName());
+			query.setParameter("password", userDetail.getPassword());
 			UserDetail userDetails = (UserDetail) query.list().get(0);
 			session.close();
 			if (userDetails == null) {
@@ -52,15 +60,17 @@ public class UserDetailDAOimpl implements UserDetailDAO {
 		}
 	}
 
-	public UserDetail getUser(String loginname) {
+	@Transactional
+	public UserDetail getUser(String loginName) {
 
 		Session session = sessionfactory.openSession();
-		UserDetail userDetail =(UserDetail)session.get(UserDetail.class,loginname);
+		UserDetail userDetails =session.get(UserDetail.class,loginName);
 		session.close();
-		return userDetail;
+		return userDetails;
 
 	}
 
+	@Transactional
 	public boolean updateUser(UserDetail user) {
 		try {
 			sessionfactory.getCurrentSession().saveOrUpdate(user);
@@ -74,6 +84,7 @@ public class UserDetailDAOimpl implements UserDetailDAO {
 		}
 	}
 
+	@Transactional
 	public boolean deleteuser(UserDetail user) {
 		try {
 			sessionfactory.getCurrentSession().delete(user);
@@ -86,6 +97,7 @@ public class UserDetailDAOimpl implements UserDetailDAO {
 		}
 	}
 
+	@Transactional
 	public List<UserDetail> listUsers() {
 		try {
 			Session session = sessionfactory.openSession();
@@ -96,6 +108,17 @@ public class UserDetailDAOimpl implements UserDetailDAO {
 			return userList;
 		} catch (Exception e) {
 			return null;
+		}
+	}
+
+	@Transactional
+	public boolean updateOnlineStatus(String status, UserDetail userDetail) {
+		try {
+			userDetail.setIsOnline(status);
+			sessionfactory.getCurrentSession().update(userDetail);
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 

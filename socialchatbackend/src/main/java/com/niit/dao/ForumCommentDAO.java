@@ -9,8 +9,8 @@ public interface ForumCommentDAO {
 	
 	
 	
-	public boolean addForumComment(Forum forumComment);
-	public boolean deleteForumComment(Forum forumComment);
+	public boolean addForumComment(ForumComment forumComment);
+	public boolean deleteForumComment(ForumComment forumComment);
 	public ForumComment getForumComment(int commentId);
 	public List<ForumComment> listForumComments(int forumId);
 

@@ -2,21 +2,28 @@ package com.niit.daoimpl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.niit.dao.ForumCommentDAO;
 import com.niit.model.Forum;
 import com.niit.model.ForumComment;
 
+@Service
+@Repository("forumCommentDAO")
 public class ForumCommentDAOimpl implements ForumCommentDAO {
 
 	@Autowired SessionFactory sessionfactory;
 	
-	public boolean addForumComment(Forum forumComment) {
+	@Transactional
+	public boolean addForumComment(ForumComment forumComment) {
 		try {
 			sessionfactory.getCurrentSession().saveOrUpdate(forumComment);
 			return true;
@@ -27,7 +34,8 @@ public class ForumCommentDAOimpl implements ForumCommentDAO {
 		}
 	}
 
-	public boolean deleteForumComment(Forum forumComment) {
+	@Transactional
+	public boolean deleteForumComment(ForumComment forumComment) {
 		try {
 			sessionfactory.getCurrentSession().delete(forumComment);
 			return true;
@@ -39,6 +47,7 @@ public class ForumCommentDAOimpl implements ForumCommentDAO {
 		
 	}
 
+	@Transactional
 	public ForumComment getForumComment(int commentId) {
 		try {
 			Session session = sessionfactory.openSession();
@@ -51,6 +60,7 @@ public class ForumCommentDAOimpl implements ForumCommentDAO {
 		}
 	}
 
+	@Transactional
 	public List<ForumComment> listForumComments(int forumId) {
 		try {
 			Session session = sessionfactory.openSession();
@@ -65,5 +75,7 @@ public class ForumCommentDAOimpl implements ForumCommentDAO {
 		}
 		
 	}
+
+	
 
 }

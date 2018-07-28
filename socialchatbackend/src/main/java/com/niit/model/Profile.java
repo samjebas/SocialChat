@@ -1,34 +1,41 @@
 package com.niit.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import oracle.sql.BLOB;
+
 
 @Component
 @Entity
 @Table
 public class Profile {
+    @Id
+	private String loginName;
+    @Lob
+	private  byte[] image;
+	
 
-	private String loginname;
-	private BLOB image;
-
-	public String getLoginname() {
-		return loginname;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setLoginname(String loginname) {
-		this.loginname = loginname;
+	public void setLoginname(String loginName) {
+		this.loginName = loginName;
 	}
 
-	public BLOB getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(BLOB image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
+
+	
+	
 
 }

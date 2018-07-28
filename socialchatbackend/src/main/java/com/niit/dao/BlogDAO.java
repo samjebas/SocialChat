@@ -13,8 +13,8 @@ public interface BlogDAO {
 	public boolean updateBlog(Blog blog);
 	public boolean approveBlog(Blog blog);
 	public boolean rejectBlog(Blog blog);
-	public BlogComment getBlog(int commentId);
-	public List<BlogComment> listBlog(int blogiId);
+	public Blog getBlog(int blogId);
+	public List<Blog> listBlog();
 	public boolean incrementLikes(Blog blog);
 	public boolean disLikes(Blog blog);
 

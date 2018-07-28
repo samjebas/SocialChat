@@ -22,22 +22,23 @@ public class BlogComment {
 	private int commentId;
 	private int blogId;
 	private String commentText;
-	private String loginname;
+	private String userName;
+	private String loginName;
 	private Date commentDate;
 
-	public int getCommentid() {
+	public int getCommentId() {
 		return commentId;
 	}
 
-	public void setCommentid(int commentId) {
+	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
 
-	public int getBlogid() {
+	public int getBlogId() {
 		return blogId;
 	}
 
-	public void setBlogid(int blogId) {
+	public void setBlogId(int blogId) {
 		this.blogId = blogId;
 	}
 
@@ -57,12 +58,20 @@ public class BlogComment {
 		this.commentDate = commentDate;
 	}
 
-	public String getLoginname() {
-		return loginname;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setLoginname(String loginname) {
-		this.loginname = loginname;
+	public void setLoginname(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

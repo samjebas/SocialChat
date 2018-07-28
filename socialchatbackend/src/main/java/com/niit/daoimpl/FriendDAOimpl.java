@@ -3,22 +3,30 @@ package com.niit.daoimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.niit.dao.FriendDAO;
 import com.niit.model.Friend;
 import com.niit.model.UserDetail;
 
+
+@Service
+@Repository("friendDAO")
 public class FriendDAOimpl implements FriendDAO {
 
 	@Autowired
 	SessionFactory sessionfactory;
 
+	@Transactional
 	public boolean sendFriendRequest(Friend friend) {
 
 		try {
@@ -34,6 +42,8 @@ public class FriendDAOimpl implements FriendDAO {
 
 	}
 
+	
+	@Transactional
 	public boolean deleteFriendRequest(int friendId) {
 		System.out.println("Into Deleting FriendRequest");
 		try {
@@ -57,6 +67,8 @@ public class FriendDAOimpl implements FriendDAO {
 		}
 	}
 
+	
+	@Transactional
 	public boolean acceptFriendRequest(int friendId) {
 		try {
 			Session session = sessionfactory.openSession();
@@ -71,6 +83,7 @@ public class FriendDAOimpl implements FriendDAO {
 		}
 	}
 
+	@Transactional
 	public boolean unFriendRequest(int friendId) {
 		try {
 			Session session = sessionfactory.openSession();
@@ -84,12 +97,14 @@ public class FriendDAOimpl implements FriendDAO {
 			return false;
 		}
 	}
-
-	public List<UserDetail> showSuggestedFriend(String loginname) {
+	
+	
+	@Transactional
+	public List<UserDetail> showSuggestedFriend(String loginName) {
 	Session session = sessionfactory.openSession();
 	SQLQuery query = session.createSQLQuery(
 			"select loginname from userdetail where loginname not in (select friendloginname from friend where loginname='"
-					+ loginname + "')and loginname!='" + loginname + "'");
+					+ loginName + "')and loginname!='" + loginName + "'");
 	List<Object> suggestedFriendName = (List<Object>) query.list();
 	List<UserDetail> suggestFriendList = new ArrayList<UserDetail>();
 	int i = 0;
@@ -97,27 +112,27 @@ public class FriendDAOimpl implements FriendDAO {
 		UserDetail userDetail = session.get(UserDetail.class, (String) suggestedFriendName.get(i));
 		suggestFriendList.add(userDetail);
 		i++;
-		
-	
-	}
+		}
 	return suggestFriendList;
 		
 	}
 
-	public List<Friend> showAllFriends(String loginname) {
+	@Transactional
+	public List<Friend> showAllFriends(String loginName) {
 	
 		Session session = sessionfactory.openSession();
 		Query query = session.createQuery("from Friend where loginname =:currentuser and status='A')");
-		query.setParameter("currentuser", loginname);
+		query.setParameter("currentuser", loginName);
 		List<Friend> listFriends = (List<Friend>) query.list();
 		return listFriends;
 	}
 
-	public List<Friend> showPendingFriendRequest(String loginname) {
+	@Transactional
+	public List<Friend> showPendingFriendRequest(String loginName) {
 		
 		Session session = sessionfactory.openSession();
 		Query query = session.createQuery("from Friend where loginname =:currentuser and status='P')");
-		query.setParameter("currentuser", loginname);
+		query.setParameter("currentuser", loginName);
 		List<Friend> listFriends = (List<Friend>) query.list();
 		return listFriends;
 	}

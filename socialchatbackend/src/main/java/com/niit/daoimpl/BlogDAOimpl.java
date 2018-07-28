@@ -2,21 +2,30 @@ package com.niit.daoimpl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.niit.dao.BlogDAO;
 import com.niit.model.Blog;
 import com.niit.model.BlogComment;
 
+
+@Service
+@Repository("blogDAO")
 public class BlogDAOimpl implements BlogDAO {
 	
 	
 	@Autowired
 	SessionFactory sessionfactory;
 
+	@Transactional
 	public boolean addBlog(Blog blog) {
 		try {
 			sessionfactory.getCurrentSession().saveOrUpdate(blog);
@@ -27,6 +36,7 @@ public class BlogDAOimpl implements BlogDAO {
 	}
 	
 
+	@Transactional
 	public boolean deleteBlog(Blog blog) {
 		try {
 			sessionfactory.getCurrentSession().delete(blog);
@@ -36,6 +46,7 @@ public class BlogDAOimpl implements BlogDAO {
 		}
 	}
 	
+	@Transactional
 	public boolean updateBlog(Blog blog) {
 		try {
 			sessionfactory.getCurrentSession().update(blog);
@@ -45,6 +56,7 @@ public class BlogDAOimpl implements BlogDAO {
 		}
 	}
 
+	@Transactional
 	public boolean approveBlog(Blog blog) {
 		try {
 			blog.setStatus("A");
@@ -55,6 +67,7 @@ public class BlogDAOimpl implements BlogDAO {
 		}
 	}
 
+	@Transactional
 	public boolean rejectBlog(Blog blog) {
 		try {
 			blog.setStatus("NA");
@@ -65,25 +78,9 @@ public class BlogDAOimpl implements BlogDAO {
 		}
 	}
 
-	public BlogComment getBlog(int commentId) {
-		try {
-			Session session = sessionfactory.openSession();
-			BlogComment blogComment = session.get(BlogComment.class,commentId);
-			return blogComment;
-		} catch (Exception e) {
-			return null;
-		}
-	}
+	
 
-	public List<BlogComment> listBlog(int blogId) {
-		Session session=sessionfactory.openSession();
-		Query query=session.createQuery("from BlogComment where blogId=:blogId");
-		query.setParameter("blogId", new Integer(blogId));
-		@SuppressWarnings("unchecked")
-		List<BlogComment> listBlogComments=query.list();
-		return listBlogComments;
-	}
-
+	@Transactional
 	public boolean incrementLikes(Blog blog) {
 		 try{
 			 int likes=blog.getLikes();
@@ -97,6 +94,7 @@ public class BlogDAOimpl implements BlogDAO {
 		 }
 	}
 
+	@Transactional
 	public boolean disLikes(Blog blog) {
 		try{
 			 int likes=blog.getLikes();
@@ -110,4 +108,30 @@ public class BlogDAOimpl implements BlogDAO {
 		 }
 	}
 
+
+	@Transactional
+	public Blog getBlog(int blogId) {
+		try {
+			Session session = sessionfactory.openSession();
+			Blog blog = session.get(Blog.class,blogId);
+			return blog;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
+	@Transactional
+	public List<Blog> listBlog() {
+		try {
+		Session session = sessionfactory.openSession();
+		org.hibernate.query.Query querry =	session.createQuery("FROM BLOG");
+		List<Blog> bloglist = querry.list();
+			return bloglist;
+	}
+		catch(Exception e) {
+			return null;
+		}
+		}
 }

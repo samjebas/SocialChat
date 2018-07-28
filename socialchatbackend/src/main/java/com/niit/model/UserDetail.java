@@ -17,21 +17,21 @@ public class UserDetail {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userdetailidseq")
-	private String loginname;
+	private String loginName;
 	private String password;
-	private String username;
-	private String emailid;
+	private String userName;
+	private String emailId;
 	private String mobileNo;
 	private String address;
 	private String role;
 	private String isOnline;
 
-	public String getLoginname() {
-		return loginname;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setLoginname(String loginname) {
-		this.loginname = loginname;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 
 	public String getPassword() {
@@ -42,20 +42,20 @@ public class UserDetail {
 		this.password = password;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getEmailid() {
-		return emailid;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setEmailid(String emailid) {
-		this.emailid = emailid;
+	public void setEmailid(String emailId) {
+		this.emailId = emailId;
 	}
 
 	public String getMobileNo() {
@@ -91,3 +91,4 @@ public class UserDetail {
 	}
 
 }
+
