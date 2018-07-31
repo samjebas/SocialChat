@@ -32,8 +32,8 @@ public class FriendTest {
 	@Test
 	public void sendFriendRequestTest() {
 		friend=new Friend();
-		friend.setFriendloginname("SAchin");
-		friend.setLoginName("Akshay");	
+		friend.setFriendloginname("PRP");
+		friend.setLoginName("Sam");	
 		assertTrue("Problem in sending friend request",friendDao.sendFriendRequest(friend));
 		System.out.println("<===================Friend Request sent======================>");
 		System.out.println("FirendID:"+friend.getFriendId());
@@ -44,14 +44,14 @@ public class FriendTest {
 	@Ignore
 	@Test
 	public void deleteFriendRequest(){
-		assertTrue("Problem in deleting friend request",friendDao.deleteFriendRequest(1));
+		assertTrue("Problem in deleting friend request",friendDao.deleteFriendRequest(10));
 		System.out.println("<====================Friend Request deleted==========================>");
 	}
-	@Ignore
+	//@Ignore
 	@Test
 	public void showPendingFriendRequestTest()
 	{
-		 List<Friend> listFriendReqPending =friendDao.showPendingFriendRequest("Shubham");
+		 List<Friend> listFriendReqPending =friendDao.showPendingFriendRequest("SSJ");
 		 assertNotNull("Problem found null pointer",listFriendReqPending);
 		System.out.println("<========================Pending friend requests=====================>");
 		 for(Friend friend:listFriendReqPending){
@@ -63,18 +63,20 @@ public class FriendTest {
 	@Test
 	public void showSuggestedFriendTest()
 	{
-		 List<UserDetail> listSuggestedFriends =friendDao.showSuggestedFriend("SachinB");
+		 List<UserDetail> listSuggestedFriends =friendDao.showSuggestedFriend("Sam");
 		 assertNotNull("Problem found null pointer",listSuggestedFriends);
 			System.out.println("<========================Suggested friends=====================>");
 		 for(UserDetail userDetail:listSuggestedFriends){
 			 System.out.println(userDetail.getLoginName());
 		 }
 	}
-	@Ignore
+
+	
+    //@Ignore
 	@Test
 	public void showAllFriendRequestsTest()
 	{
-		 List<Friend> listFriendRequests =friendDao.showAllFriends("Shubham");
+		 List<Friend> listFriendRequests =friendDao.showAllFriends("Sam");
 		 assertNotNull("Problem found null pointer",listFriendRequests);
 		System.out.println("<========================All friend requests=====================>");
 		 for(Friend friend:listFriendRequests){
@@ -85,7 +87,7 @@ public class FriendTest {
 	@Test
 	public void acceptFriendRequestTest()
 	{
-		assertTrue("Problem in accepting the friend request..",friendDao.acceptFriendRequest(4));
+		assertTrue("Problem in accepting the friend request..",friendDao.acceptFriendRequest(7));
 		System.out.println("<========================Friend request accepted=====================>");
 		
 	}

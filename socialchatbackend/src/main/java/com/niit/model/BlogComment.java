@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table
-@SequenceGenerator(name = "blogcommentidseq", sequenceName="blogComment_id_seq", allocationSize = 1)
+@SequenceGenerator(name = "blogcommentidseq", sequenceName="blogcomment_id_seq", allocationSize = 1)
 public class BlogComment {
 
 	@Id

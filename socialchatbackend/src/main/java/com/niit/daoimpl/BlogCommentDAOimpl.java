@@ -53,6 +53,7 @@ public class BlogCommentDAOimpl implements BlogCommentDAO {
 		}	
 	}
 
+	@SuppressWarnings("deprecation")
 	@Transactional
 	public List<BlogComment> listBlogComment(int blogId) {
 		Session session=sessionfactory.openSession();

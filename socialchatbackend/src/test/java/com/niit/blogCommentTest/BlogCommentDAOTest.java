@@ -26,7 +26,7 @@ public class BlogCommentDAOTest {
 	
 	
 	@BeforeClass
-	public void intialise() {
+	public static void intialise() {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit");
 		context.refresh();
@@ -40,23 +40,25 @@ public class BlogCommentDAOTest {
 		System.out.println("---------Config Tested-------------");
 	}
 	
-	@Ignore
+	//@Ignore
 	@Test
 	public void testAddBlogComment() {
 	    blogComment = new BlogComment();
-	    blogComment.setBlogId(3);
-		blogComment.setUserName("Jebastin");
+	    blogComment.setLoginname("SSJ");
+	    blogComment.setBlogId(15);
+		blogComment.setUserName("Samuel");
 		blogComment.setCommentDate(new java.util.Date());
-		blogComment.setCommentText("Hibernate blog");
+		blogComment.setCommentText("|It is League of Many Power Hitters Power");
 		assertEquals("Successfully added the blogComment...", true, blogcommentDao.addBlogComment(blogComment));
 		System.out.println("<-----------Successfully added blogCommment-------->");
 	}
 
-	@Ignore
+	@Ignore 
 	@Test
 	public void testGetBlogCommment() {
-		blogComment = blogcommentDao.getBlogComment(1);
-		assertEquals("Successfully fetched a blogComments from the table", "SamSSJ", blogComment.getUserName());
+		blogComment = blogcommentDao.getBlogComment(8);
+		assertEquals("Successfully fetched a blogComments from the table", "Samuel", blogComment.getUserName());
+		
 		System.out.println("<========BlogComment========>");
 		System.out.println("blogID :" + blogComment.getBlogId());
 		System.out.println("Username :" + blogComment.getUserName());
@@ -66,7 +68,7 @@ public class BlogCommentDAOTest {
 		System.out.println("<-----------Successfully fetched blogComment-------->");
 	}
 
-	//@Ignore
+	@Ignore
 	@Test
 	public void testDeleteBlogComment() {
 		blogComment = blogcommentDao.getBlogComment(5);
@@ -74,11 +76,11 @@ public class BlogCommentDAOTest {
 		System.out.println("<-----------Successfully deleted blogComment-------->");
 	}
 
-	// @Ignore
+	 //@Ignore 
 	@Test
 	public void testListBlogComments() {
-		List<BlogComment> listBlogComments = blogcommentDao.listBlogComment(1);
-		assertTrue("Successfully fetched all blogs from the table", blogcommentDao.listBlogComment(1).size() > 0);
+		List<BlogComment> listBlogComments = blogcommentDao.listBlogComment(8);
+		assertTrue("Successfully fetched all blogs from the table", blogcommentDao.listBlogComment(14).size() > 0);
 		System.out.println("<======BlogComments fetched======>");
 		for (BlogComment blogComment : listBlogComments) {
 			System.out.println("blogID :" + blogComment.getBlogId());

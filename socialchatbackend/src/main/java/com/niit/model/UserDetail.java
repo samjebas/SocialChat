@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table
-@SequenceGenerator(name = "userdetailidseq", sequenceName = "USERDetail_ID_SEQ", allocationSize = 1)
+@Table(name = "UserDetail")
+@SequenceGenerator(name = "userdetailidseq", sequenceName = "userdetail_id_seq", allocationSize = 1)
 public class UserDetail {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userdetailidseq")
+	
 	private String loginName;
 	private String password;
 	private String userName;

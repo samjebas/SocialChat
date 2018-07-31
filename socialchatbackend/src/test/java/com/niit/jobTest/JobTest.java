@@ -31,50 +31,51 @@ public class JobTest {
 		jobDao = (JobDetailDAO) context.getBean("jobDAO");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void insertJobTest() throws ParseException {
 
 		job = new JobDetail();
 		job.setJobDesignation("Trainee Er");
-		job.setCompany("Syntel");
-		job.setJobDescription("Applied for trainee engineer.");
+		job.setCompany("Accenture");
+		job.setJobDescription("Applied for Trainee Engineer");
 		job.setLastDateToApply(new Date());
 		job.setSalary(25000);
 		job.setLocation("Mumbai");
+		job.setRole("Trainer");
 		
 		assertEquals("Successfully added job into the table", true, jobDao.addJob(job));
 
 		System.out.println("<-----------Successfully inserted into job-------->");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void updateJobTest() throws ParseException {
 		job = jobDao.getJob(1);
-		job.setJobDesignation("AssociateER");
+		job.setJobDesignation("AssociateDeveloper");
 		job.setCompany("IBM");
-		job.setJobDescription("Associate engineer for core java advance java");
+		job.setJobDescription("Associate engineer for Software Projects");
 		assertEquals("Successfully updated job into the table", true, jobDao.updateJob(job));
 		System.out.println("<-----------Successfully updated job-------->");
 	}
 
-	@Ignore
+	
 	@Test
 	public void testGetJob() {
 		job = jobDao.getJob(1);
-		assertEquals("Successfully fetched a job details from the table", "AssociateER", job.getJobDesignation());
+		assertEquals("Successfully fetched a job details from the table", "AssociateDeveloper", job.getJobDesignation());
 		System.out.println("<-----------Successfully fetched job-------->");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testGetAllJob() {
 		assertTrue("Successfully fetched all jobs from the table", jobDao.listAllJobs().size() > 0);
 		System.out.println("No of jobs:" + jobDao.listAllJobs().size());
 		System.out.println("<-----------Successfully retrieved list of job-------->");
 	}
-	@Ignore
+	
 	@Test
 	public void testDeleteJob() {
 		job = jobDao.getJob(2);
@@ -86,9 +87,9 @@ public class JobTest {
 	@Test
 	public void testApplyJob() {
 		applyJob = new ApplyJob();
-		job=jobDao.getJob(3);
+		job=jobDao.getJob(11);
 		applyJob.setAppliedDate(new Date());
-		applyJob.setLoginname("shubham");
+		applyJob.setLoginname("Jebas");
 		applyJob.setJobId(job.getJobId());
 		assertEquals("Successfully applied for job...", true, jobDao.applyJob(applyJob));
 		System.out.println("<-----------Successfully applied for job-------->");

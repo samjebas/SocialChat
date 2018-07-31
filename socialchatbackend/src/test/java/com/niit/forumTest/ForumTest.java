@@ -30,28 +30,28 @@ public class ForumTest {
 		forumDao = (ForumDAO) context.getBean("forumDAO");
 	}
 
-	@Ignore
+	
 	@Test
 	public void insertForumTest() throws ParseException {
 
 		forum = new Forum();
-		forum.setForumName("Shubham");
-		forum.setLoginName("shubhamRD");
-		forum.setForumContent("Food Forum");
+		forum.setForumName("Interval Match Analysis");
+		forum.setLoginName("Jebas");
+		forum.setForumContent("How to Outplay the Opponent Team ");
 		forum.setCreateDate(new Date());
-		forum.setStatus("NA");
+		forum.setStatus("A");
 		assertEquals("Successfully added Forum into the table", true, forumDao.addForum(forum));
 
 		System.out.println("<-----------Successfully inserted into Forum-------->");
 	}
 
-	@Ignore
+	
 	@Test
 	public void updateForumTest() throws ParseException {
 
 		forum = forumDao.getForum(1);
-		forum.setForumName("99Dishes");
-		forum.setForumContent("This is best place to visit..");
+		forum.setForumName("MasterBlaster");
+		forum.setForumContent("This is the best ..");
 		forum.setStatus("AP");
 		forum.setCreateDate(new Date());
 		forum.setLoginName("ShubhamRDurugkar");
@@ -59,11 +59,11 @@ public class ForumTest {
 		System.out.println("<-----------Successfully updated forum-------->");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testGetForum() {
-		forum = forumDao.getForum(1);
-		assertEquals("Successfully fetched a forum details from the table", "99Dishes", forum.getForumName());
+		forum = forumDao.getForum(6);
+		assertEquals("Successfully fetched a forum details from the table", "Post Match Analysis", forum.getForumName());
 		System.out.println("<=========Forum fetched=======>");
 		System.out.println("forumID :" + forum.getForumId());
 		System.out.println("forumName :" + forum.getForumName());
@@ -74,7 +74,7 @@ public class ForumTest {
 		System.out.println("<-----------Successfully fetched forum-------->");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testListForums() {
 		List<Forum> listForums = forumDao.listForum();
@@ -99,7 +99,7 @@ public class ForumTest {
 		System.out.println("<-----------Successfully deleted forum-------->");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testApproveForum() {
 		forum = forumDao.getForum(3);
@@ -112,7 +112,7 @@ public class ForumTest {
 		}
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testRejectForum() {
 		forum = forumDao.getForum(3);

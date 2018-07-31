@@ -41,7 +41,7 @@ public class HibernateConfig {
 		
 		Properties hibernateProp=new Properties();
 		hibernateProp.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
-		hibernateProp.put("hibernate.hbmddl2.auto","create");
+		hibernateProp.put("hibernate.hbm2ddl.auto","update");
 		hibernateProp.put("hibernate.show_sql", "true");
 		
 		

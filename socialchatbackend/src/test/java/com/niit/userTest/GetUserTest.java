@@ -3,7 +3,6 @@ package com.niit.userTest;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -12,26 +11,22 @@ import com.niit.model.UserDetail;
 
 public class GetUserTest {
 
-	private static UserDetailDAO userdao;
+	private static UserDetailDAO userDao;
 	private UserDetail user;
 
 	@BeforeClass
-	public void intialise() {
-
+	public static void initialize() {
+		@SuppressWarnings("resource")
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 		context.scan("com.niit");
 		context.refresh();
-		userdao = (UserDetailDAO) context.getBean("UserDAO");
-
+		userDao = (UserDetailDAO) context.getBean("UserDAO");
 	}
 
-	@Ignore
 	@Test
-	public void getUserNameTest() {
-		
-		user = userdao.getUser("Sam") ;
-		assertEquals("Successfully fetched  the username   from the Table", "Samuel Jebastin",user.getUserName());
-		System.out.println("---------------Fetched username Successfully------------");
-
+	public void testGetUser() {
+		user = userDao.getUser("Sam");
+		assertEquals("Successfully fetched a user details from the table", "Jebastin", user.getUserName());
+		System.out.println("<-----------Successfully fetched user-------->");
 	}
 }

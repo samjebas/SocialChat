@@ -6,8 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,13 +98,15 @@ public class FriendDAOimpl implements FriendDAO {
 		}
 	}
 	
-	
+
+	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	@Transactional
 	public List<UserDetail> showSuggestedFriend(String loginName) {
 	Session session = sessionfactory.openSession();
+	@SuppressWarnings("deprecation")
 	SQLQuery query = session.createSQLQuery(
-			"select loginname from userdetail where loginname not in (select friendloginname from friend where loginname='"
-					+ loginName + "')and loginname!='" + loginName + "'");
+			"select loginName from userdetail where loginName not in (select friendloginname from Friend where loginName='"
+					+ loginName + "')and loginName!='" + loginName + "'");
 	List<Object> suggestedFriendName = (List<Object>) query.list();
 	List<UserDetail> suggestFriendList = new ArrayList<UserDetail>();
 	int i = 0;
@@ -117,21 +119,25 @@ public class FriendDAOimpl implements FriendDAO {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Transactional
 	public List<Friend> showAllFriends(String loginName) {
 	
 		Session session = sessionfactory.openSession();
-		Query query = session.createQuery("from Friend where loginname =:currentuser and status='A')");
+		@SuppressWarnings("rawtypes")
+		Query query = session.createQuery("FROM Friend WHERE logiName = :currentuser AND status='A')");
 		query.setParameter("currentuser", loginName);
+		@SuppressWarnings("unchecked")
 		List<Friend> listFriends = (List<Friend>) query.list();
 		return listFriends;
 	}
 
+	@SuppressWarnings({ "deprecation", "unchecked", "rawtypes" })
 	@Transactional
 	public List<Friend> showPendingFriendRequest(String loginName) {
 		
 		Session session = sessionfactory.openSession();
-		Query query = session.createQuery("from Friend where loginname =:currentuser and status='P')");
+		Query query = session.createQuery("FROM Friend WHERE loginName =:currentuser AND status='P')");
 		query.setParameter("currentuser", loginName);
 		List<Friend> listFriends = (List<Friend>) query.list();
 		return listFriends;

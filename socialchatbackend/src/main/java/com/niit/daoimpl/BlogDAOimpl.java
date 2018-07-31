@@ -97,9 +97,9 @@ public class BlogDAOimpl implements BlogDAO {
 	@Transactional
 	public boolean disLikes(Blog blog) {
 		try{
-			 int likes=blog.getLikes();
-			 likes--;
-			 blog.setLikes(likes);
+			 int likes=blog.getDislikes();
+			 likes++;
+			 blog.setDislikes(likes);
 			 sessionfactory.getCurrentSession().update(blog);
 			 return true;
 		 }catch(Exception e)
@@ -126,7 +126,7 @@ public class BlogDAOimpl implements BlogDAO {
 	public List<Blog> listBlog() {
 		try {
 		Session session = sessionfactory.openSession();
-		org.hibernate.query.Query querry =	session.createQuery("FROM BLOG");
+		org.hibernate.query.Query querry =	session.createQuery("FROM Blog");
 		List<Blog> bloglist = querry.list();
 			return bloglist;
 	}

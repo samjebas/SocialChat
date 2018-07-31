@@ -30,24 +30,24 @@ public class ForumCommentTest {
 	
 	
 	
-	@Ignore
+	//@Ignore
 	@Test
-	public void testAddForumComment() {
+	public void AddForumComment() {
 		forumComment = new ForumComment();
 		
 		forumComment.setForumId(1);
-		forumComment.setLoginname("Cricket");
+		forumComment.setLoginname("SSJ");
 		forumComment.setCommentDate(new Date());
-		forumComment.setCommentText("Destiny forum");
+		forumComment.setCommentText("Both Team Are Looking Good To Capitalize Each Other");
 		assertEquals("Successfully added the forumComment...", true, forumcommentDao.addForumComment(forumComment));
 		System.out.println("<-----------Successfully added forumCommment-------->");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testGetForumCommment() {
-		forumComment = forumcommentDao.getForumComment(1);
-		assertEquals("Successfully fetched a forumComments from the table", "ShubhamRDurugkar",
+		forumComment = forumcommentDao.getForumComment(4);
+		assertEquals("Successfully fetched a forumComments from the table", "SSJ",
 				forumComment.getLoginName());
 		System.out.println("<========ForumComment========>");
 		System.out.println("forumID :" + forumComment.getForumId());
@@ -58,7 +58,7 @@ public class ForumCommentTest {
 		System.out.println("<-----------Successfully fetched forumComment-------->");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void testDeleteForumComment() {
 		forumComment = forumcommentDao.getForumComment(4);

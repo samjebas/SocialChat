@@ -7,12 +7,10 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.dao.UserDetailDAO;
-import com.niit.model.UserDetail;
 
-public class DeleteUserTest {
+public class GetAllUsersTest {
 
 	private static UserDetailDAO userDao;
-	private UserDetail user;
 
 	@BeforeClass
 	public static void initialize() {
@@ -24,9 +22,10 @@ public class DeleteUserTest {
 	}
 
 	@Test
-	public void testDeleteUser() {
-		user = userDao.getUser("Shubham");
-		assertEquals("Successfully deleted user details from the table", true, userDao.deleteuser(user));
-		System.out.println("<-----------Successfully deleted user-------->");
+	public void testListUser() {
+		assertEquals("Successfully fetched all users from the table", 3,
+				userDao.listUsers().size());
+
+		System.out.println("<-----------Successfully retrieved list of user-------->");
 	}
 }

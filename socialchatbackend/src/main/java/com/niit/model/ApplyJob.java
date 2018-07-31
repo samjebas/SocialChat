@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table
-@SequenceGenerator(name="applyjob_sequence", sequenceName = "appjob_id_seq", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name="applyjob_sequence", sequenceName = "applyjob_id_seq", initialValue = 1, allocationSize = 1)
 public class ApplyJob {
 	
 	private int jobId;
