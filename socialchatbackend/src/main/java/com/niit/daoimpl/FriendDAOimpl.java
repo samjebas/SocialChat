@@ -125,7 +125,7 @@ public class FriendDAOimpl implements FriendDAO {
 	
 		Session session = sessionfactory.openSession();
 		@SuppressWarnings("rawtypes")
-		Query query = session.createQuery("FROM Friend WHERE logiName = :currentuser AND status='A')");
+		Query query = session.createQuery("from Friend where loginName = :currentuser and status='A'");
 		query.setParameter("currentuser", loginName);
 		@SuppressWarnings("unchecked")
 		List<Friend> listFriends = (List<Friend>) query.list();
@@ -137,7 +137,7 @@ public class FriendDAOimpl implements FriendDAO {
 	public List<Friend> showPendingFriendRequest(String loginName) {
 		
 		Session session = sessionfactory.openSession();
-		Query query = session.createQuery("FROM Friend WHERE loginName =:currentuser AND status='P')");
+		Query query = session.createQuery("from Friend where loginName =:currentuser and status='P'");
 		query.setParameter("currentuser", loginName);
 		List<Friend> listFriends = (List<Friend>) query.list();
 		return listFriends;

@@ -51,7 +51,7 @@ public class FriendTest {
 	@Test
 	public void showPendingFriendRequestTest()
 	{
-		 List<Friend> listFriendReqPending =friendDao.showPendingFriendRequest("SSJ");
+		 List<Friend> listFriendReqPending =friendDao.showPendingFriendRequest("Jebas");
 		 assertNotNull("Problem found null pointer",listFriendReqPending);
 		System.out.println("<========================Pending friend requests=====================>");
 		 for(Friend friend:listFriendReqPending){
@@ -63,7 +63,7 @@ public class FriendTest {
 	@Test
 	public void showSuggestedFriendTest()
 	{
-		 List<UserDetail> listSuggestedFriends =friendDao.showSuggestedFriend("Sam");
+		 List<UserDetail> listSuggestedFriends =friendDao.showSuggestedFriend("SSJ");
 		 assertNotNull("Problem found null pointer",listSuggestedFriends);
 			System.out.println("<========================Suggested friends=====================>");
 		 for(UserDetail userDetail:listSuggestedFriends){
@@ -72,7 +72,7 @@ public class FriendTest {
 	}
 
 	
-    //@Ignore
+    @Ignore
 	@Test
 	public void showAllFriendRequestsTest()
 	{
