@@ -37,9 +37,9 @@ public class BlogDAOTest {
 @Test
 	public void insertBlogTest() throws ParseException {
 		blog = new Blog();
-		blog.setBlogName("Pakistan Premier League");
-		blog.setLoginName("SSJ");
-		blog.setBlogContent(" Best Bowling League");
+		blog.setBlogName(" New Premier League");
+		blog.setLoginName("jSSJ");
+		blog.setBlogContent(" Bowling League");
 		blog.setStatus("A");
 		blog.setLikes(10);
 		blog.setDislikes(2);

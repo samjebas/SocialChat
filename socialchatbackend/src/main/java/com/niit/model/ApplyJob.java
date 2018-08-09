@@ -26,6 +26,7 @@ public class ApplyJob {
 	private Date appliedDate;
 	
 	
+	
 	public int getJobId() {
 		return jobId;
 	}
@@ -50,5 +51,6 @@ public class ApplyJob {
 	public void setAppliedDate(Date appliedDate) {
 		this.appliedDate = appliedDate;
 	}
+	
 
 }

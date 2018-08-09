@@ -28,12 +28,12 @@ public class FriendTest {
 		friendDao = (FriendDAO) context.getBean("friendDAO");
 	}
 
-	@Ignore
+	//@Ignore
 	@Test
 	public void sendFriendRequestTest() {
 		friend=new Friend();
-		friend.setFriendloginname("PRP");
-		friend.setLoginName("Sam");	
+		friend.setFriendloginname("Rejo");
+		friend.setLoginName("SSJ");	
 		assertTrue("Problem in sending friend request",friendDao.sendFriendRequest(friend));
 		System.out.println("<===================Friend Request sent======================>");
 		System.out.println("FirendID:"+friend.getFriendId());
@@ -51,7 +51,7 @@ public class FriendTest {
 	@Test
 	public void showPendingFriendRequestTest()
 	{
-		 List<Friend> listFriendReqPending =friendDao.showPendingFriendRequest("Jebas");
+		 List<Friend> listFriendReqPending =friendDao.showPendingFriendRequest("Sam");
 		 assertNotNull("Problem found null pointer",listFriendReqPending);
 		System.out.println("<========================Pending friend requests=====================>");
 		 for(Friend friend:listFriendReqPending){
@@ -59,11 +59,11 @@ public class FriendTest {
 		 }
 	}
 	
-	@Ignore
+	//@Ignore
 	@Test
 	public void showSuggestedFriendTest()
 	{
-		 List<UserDetail> listSuggestedFriends =friendDao.showSuggestedFriend("SSJ");
+		 List<UserDetail> listSuggestedFriends =friendDao.showSuggestedFriend("Sam");
 		 assertNotNull("Problem found null pointer",listSuggestedFriends);
 			System.out.println("<========================Suggested friends=====================>");
 		 for(UserDetail userDetail:listSuggestedFriends){
@@ -72,7 +72,7 @@ public class FriendTest {
 	}
 
 	
-    @Ignore
+    //@Ignore
 	@Test
 	public void showAllFriendRequestsTest()
 	{

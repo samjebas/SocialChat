@@ -18,55 +18,47 @@ import org.springframework.web.bind.annotation.RestController;
 import com.niit.dao.UserDetailDAO;
 import com.niit.model.UserDetail;
 
-
 @RestController
 public class UserDetailController {
-	
-	
+
 	@Autowired
 	UserDetailDAO userDAO;
-	
-	//------------------CheckLogin-----------------
+
+	// ------------------CheckLogin-----------------
 	@PostMapping(value = "/login")
-	public ResponseEntity<UserDetail> checkLogin(@RequestBody UserDetail userDetail, HttpSession session){
-		
-		if(userDAO.checkLogin(userDetail))
-		{
-			UserDetail tempUser=(UserDetail)userDAO.getUser(userDetail.getLoginName());
+	public ResponseEntity<UserDetail> checkLogin(@RequestBody UserDetail userDetail, HttpSession session) {
+
+		if (userDAO.checkLogin(userDetail)) {
+			UserDetail tempUser = (UserDetail) userDAO.getUser(userDetail.getLoginName());
 			userDAO.updateOnlineStatus("Y", tempUser);
-		
-			session.setAttribute("userdetail",tempUser);
-			session.setAttribute("loginName",userDetail.getLoginName());
-			return new ResponseEntity<UserDetail>(tempUser,HttpStatus.OK);
-		}
-		else
-		{
-			return new ResponseEntity<UserDetail>(userDetail,HttpStatus.INTERNAL_SERVER_ERROR);
+
+			session.setAttribute("userdetail", tempUser);
+			session.setAttribute("loginName", userDetail.getLoginName());
+			return new ResponseEntity<UserDetail>(tempUser, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<UserDetail>(userDetail, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
+	// ---------------------RegisterUser----------------------------------//
+	@PostMapping(value = "/register")
+	public ResponseEntity<UserDetail> registerUser(@RequestBody UserDetail user) {
 
-//---------------------RegisterUser----------------------------------//
-@PostMapping(value="/register")
-public ResponseEntity<UserDetail> registerUser(@RequestBody UserDetail user){
-	
-	user.setIsOnline("N");
-	user.setLoginName("Raju");
-	user.setRole("ROLE_USER");
-	if (userDAO.registerUser(user)) {
-		return new ResponseEntity<UserDetail>(user, HttpStatus.OK);
-	} else {
-		return new ResponseEntity<UserDetail>(user, HttpStatus.NOT_FOUND);
+		user.setIsOnline("N");
+		user.setLoginName("Raju");
+		user.setRole("ROLE_USER");
+		if (userDAO.registerUser(user)) {
+			return new ResponseEntity<UserDetail>(user, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<UserDetail>(user, HttpStatus.NOT_FOUND);
+		}
+
 	}
-	
-	
-	
-}
 
-
-//----------- Update User -----------------------------
+	// ----------- Update User -----------------------------
 	@PutMapping(value = "/updateUser/{loginname}")
-	public ResponseEntity<String> updateUser(@PathVariable("loginame") String loginname, @RequestBody UserDetail userDetail) {
+	public ResponseEntity<String> updateUser(@PathVariable("loginame") String loginname,
+			@RequestBody UserDetail userDetail) {
 		System.out.println("In updating user " + loginname);
 		UserDetail mUser = userDAO.getUser(loginname);
 		if (mUser == null) {
@@ -74,9 +66,11 @@ public ResponseEntity<UserDetail> registerUser(@RequestBody UserDetail user){
 			return new ResponseEntity<String>("No user found", HttpStatus.NOT_FOUND);
 		}
 
-	/*	mUser.setEmailId(userDetail.getEmailId());
-		mUser.setMobileNo(userDetail.getMobileNo());
-		mUser.setAddress(userDetail.getAddress());*/
+		/*
+		 * mUser.setEmailId(userDetail.getEmailId());
+		 * mUser.setMobileNo(userDetail.getMobileNo());
+		 * mUser.setAddress(userDetail.getAddress());
+		 */
 		mUser.setMobileNo(userDetail.getMobileNo());
 		userDAO.updateUser(mUser);
 		return new ResponseEntity<String>("User updated successfully", HttpStatus.OK);
@@ -104,7 +98,7 @@ public ResponseEntity<UserDetail> registerUser(@RequestBody UserDetail user){
 		}
 	}
 
-	//-----------------------Delete user-----------------------
+	// -----------------------Delete user-----------------------
 	@DeleteMapping(value = "/deleteUser/{loginname}")
 	public ResponseEntity<String> deleteUser(@PathVariable("loginname") String loginname) {
 		System.out.println("In delete user" + loginname);
@@ -114,13 +108,9 @@ public ResponseEntity<UserDetail> registerUser(@RequestBody UserDetail user){
 			return new ResponseEntity<String>("No user found to delete", HttpStatus.NOT_FOUND);
 		} else {
 			userDAO.deleteuser(user);
-			return new ResponseEntity<String>("User with LoginName " + loginname + " deleted successfully", HttpStatus.OK);
+			return new ResponseEntity<String>("User with LoginName " + loginname + " deleted successfully",
+					HttpStatus.OK);
 		}
 	}
-
-
-
-
-
 
 }
